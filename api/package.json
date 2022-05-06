@@ -4,7 +4,9 @@
   "main": "src/server.ts",
   "license": "MIT",
   "scripts": {
+    "build": "npx tsc",
     "dev": "ts-node-dev src/server.ts",
+    "start": "node dist/server.js",
     "test": "jest"
   },
   "devDependencies": {
