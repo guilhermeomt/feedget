@@ -28,21 +28,25 @@ export class SubmitFeedbackUseCase {
       throw new Error("Screenshot must be a base64 encoded image");
     }
 
-    await this.feedbacksRepository.create({
-      type,
-      comment,
-      screenshot,
-    });
+    try {
+      await this.feedbacksRepository.create({
+        type,
+        comment,
+        screenshot,
+      });
 
-    await this.nodemailerMailAdapter.sendMail({
-      subject: "Novo feedback do usuário",
-      body: [
-        `<div style="font-family: sans-serif; font-size: 16px; color: #111">`,
-        `<p>Tipo de feedback: ${type}</p>`,
-        `<p>Comentário: ${comment}</p>`,
-        screenshot ? `<img src="${screenshot}" />` : "",
-        "</div>",
-      ].join("\n"),
-    });
+      await this.nodemailerMailAdapter.sendMail({
+        subject: "Novo feedback do usuário",
+        body: [
+          `<div style="font-family: sans-serif; font-size: 16px; color: #111">`,
+          `<p>Tipo de feedback: ${type}</p>`,
+          `<p>Comentário: ${comment}</p>`,
+          screenshot ? `<img src="${screenshot}" />` : "",
+          "</div>",
+        ].join("\n"),
+      });
+    } catch (err) {
+      console.log(err);
+    }
   }
 }
