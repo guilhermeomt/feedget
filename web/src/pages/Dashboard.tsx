@@ -1,5 +1,6 @@
 import { Dialog, Switch } from "@headlessui/react";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useAuth } from "../hooks/useAuth";
 import logoImageUrl from "../assets/logo-brand.png";
 import { WidgetCard } from "../components/WidgetCard";
@@ -14,12 +15,14 @@ export type Feedback = {
 };
 
 export function Dashboard() {
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
+  const navigate = useNavigate();
   let [isModalOpen, setIsModalOpen] = useState(false);
   const [enabled, setEnabled] = useState(false);
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
   const [screenshot, setScreenshot] = useState<string | null>(null);
 
+  console.log(user?.avatar);
   useEffect(() => {
     api.get("/feedbacks").then((response) => {
       setFeedbacks(response.data.data.feedbacks);
@@ -54,7 +57,15 @@ export function Dashboard() {
               alt={user?.name}
             />
             <span className="font-bold text-sm">{user?.name}</span>
-            <button className="ml-4 text-gray-300">Sair</button>
+            <button
+              onClick={async () => {
+                await signOut();
+                navigate("/");
+              }}
+              className="ml-4 text-gray-300"
+            >
+              Sair
+            </button>
           </div>
         </header>
 
