@@ -1,3 +1,9 @@
+export interface FeedbackDto {
+  type: string;
+  comment: string;
+  screenshot?: string | null;
+}
+
 export interface FeedbackCreateDto {
   type: string;
   comment: string;
@@ -5,5 +11,6 @@ export interface FeedbackCreateDto {
 }
 
 export interface FeedbacksRepository {
+  list(): Promise<FeedbackDto[] | void>;
   create: (data: FeedbackCreateDto) => Promise<void>;
 }
