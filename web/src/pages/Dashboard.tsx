@@ -23,7 +23,6 @@ export function Dashboard() {
   const [screenshot, setScreenshot] = useState<string | null>(null);
   const { isDarkMode, handleDarkMode } = useDarkMode();
 
-  console.log(user?.avatar);
   useEffect(() => {
     api.get("/feedbacks").then((response) => {
       setFeedbacks(response.data.data.feedbacks);
@@ -32,11 +31,11 @@ export function Dashboard() {
 
   return (
     <div className="flex h-screen overflow-hidden">
-      <div className="relative flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
-        <header className="flex items-center justify-between flex-wrap bg-brand-800 p-4">
-          <div className="flex gap-3 items-center flex-shrink-0 text-white mr-6">
+      <div className="relative flex-col flex-1 overflow-y-auto overflow-x-hidden">
+        <header className="flex items-center flex-col md:flex-row justify-center md:justify-between flex-wrap bg-brand-800 p-4">
+          <div className="flex gap-3 items-center flex-shrink-0 text-white mr-6 mb-5 md:mb-0">
             <img className="w-8" src={logoImageUrl} alt="Feedget" />
-            <span className="font-bold text-xl tracking-tight">Feedget</span>
+            <span className="font-bold text-xl tracking-tight ">Feedget</span>
           </div>
           <div className="flex items-center text-white">
             <div className="mr-2">

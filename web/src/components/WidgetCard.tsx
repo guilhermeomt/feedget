@@ -14,7 +14,7 @@ export function WidgetCard({
   onSetScreenshot,
 }: WidgetCardProps) {
   return (
-    <div className="col-span-3">
+    <div className="col-span-12 md:col-span-4 lg:col-span-3">
       <div className="min-h-[220px] bg-zinc-100 dark:bg-[#181818] rounded-lg shadow-md p-6">
         <div className="flex flex-col gap-3 items-center justify-between">
           <h2 className="text-2xl font-bold">

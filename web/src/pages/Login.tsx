@@ -20,16 +20,16 @@ export function Login() {
   }
 
   return (
-    <div className="flex">
-      <div className="flex-[33%] flex items-center justify-center h-screen bg-brand-800 shadow-r-xl">
+    <div className="flex h-screen">
+      <div className="hidden md:flex flex-[33%] items-center justify-center h-screen bg-brand-800 shadow-r-xl">
         <img className="w-96" src={logoImageUrl} alt="Feedget" />
       </div>
-      <div className="flex-[66%] flex items-center justify-center">
-        <div className="bg-[#f4f4f8] dark:bg-[#181818] w-6/12 h-3/6 p-12 flex flex-col items-center rounded-lg">
+      <div className="flex-[80%] md:flex-[66%] flex items-center justify-center">
+        <div className="bg-[#f4f4f8] dark:bg-[#181818] w-10/12 md:w-7/12 md:h-3/6 p-12 flex flex-col items-center rounded-lg">
           <h1 className="text-2xl font-bold text-center">
             Comece a coletar feedbacks agora!
           </h1>
-          <h2 className="text-center mt-1">
+          <h2 className="text-center mt-1 mb-5 md:mb-0">
             <span className="text-brand-300">Feedget</span> é um aplicativo que
             permite que você colete feedbacks de usuários de forma rápida e
             fácil.
