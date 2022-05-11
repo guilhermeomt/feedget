@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { Widget } from "@/components";
 import { GoogleLogo } from "phosphor-react";
+import { Moon, Sun } from "phosphor-react";
 import { useAuth } from "../hooks/useAuth";
 import logoImageUrl from "../assets/logo.png";
+import { useDarkMode } from "../hooks/useDarkMode";
 
 export function Login() {
   const navigate = useNavigate();
   const { user, signInWithGoogle } = useAuth();
+  const { isDarkMode, handleDarkMode } = useDarkMode();
 
   async function handleUserLogin() {
     if (!user) {
@@ -22,7 +25,7 @@ export function Login() {
         <img className="w-96" src={logoImageUrl} alt="Feedget" />
       </div>
       <div className="flex-[66%] flex items-center justify-center">
-        <div className="bg-[#181818] w-6/12 h-3/6 p-12 flex flex-col items-center rounded-lg">
+        <div className="bg-[#f4f4f8] dark:bg-[#181818] w-6/12 h-3/6 p-12 flex flex-col items-center rounded-lg">
           <h1 className="text-2xl font-bold text-center">
             Comece a coletar feedbacks agora!
           </h1>
@@ -44,6 +47,13 @@ export function Login() {
 
         <Widget />
       </div>
+
+      <button
+        onClick={handleDarkMode}
+        className="absolute right-5 top-5 p-3 bg-[#f4f4f8] dark:bg-[#27272a] rounded-lg"
+      >
+        {isDarkMode ? <Sun color="#fff" /> : <Moon />}
+      </button>
     </div>
   );
 }

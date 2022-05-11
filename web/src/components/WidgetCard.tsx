@@ -15,7 +15,7 @@ export function WidgetCard({
 }: WidgetCardProps) {
   return (
     <div className="col-span-3">
-      <div className="min-h-[220px] bg-[#181818] rounded-lg shadow-lg p-6">
+      <div className="min-h-[220px] bg-zinc-100 dark:bg-[#181818] rounded-lg shadow-md p-6">
         <div className="flex flex-col gap-3 items-center justify-between">
           <h2 className="text-2xl font-bold">
             <img

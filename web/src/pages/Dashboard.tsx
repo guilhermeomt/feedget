@@ -1,12 +1,13 @@
-import { Dialog, Switch } from "@headlessui/react";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useAuth } from "../hooks/useAuth";
-import logoImageUrl from "../assets/logo-brand.png";
-import { WidgetCard } from "../components/WidgetCard";
-import { api } from "../lib/api";
+import { Dialog, Switch } from "@headlessui/react";
 import { Widget } from "@/components";
-import { X } from "phosphor-react";
+import { WidgetCard } from "../components/WidgetCard";
+import { useAuth } from "../hooks/useAuth";
+import { useDarkMode } from "../hooks/useDarkMode";
+import { api } from "../lib/api";
+import { Moon, Sun, X } from "phosphor-react";
+import logoImageUrl from "../assets/logo-brand.png";
 
 export type Feedback = {
   type: string;
@@ -18,9 +19,9 @@ export function Dashboard() {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
   let [isModalOpen, setIsModalOpen] = useState(false);
-  const [enabled, setEnabled] = useState(false);
   const [feedbacks, setFeedbacks] = useState<Feedback[]>([]);
   const [screenshot, setScreenshot] = useState<string | null>(null);
+  const { isDarkMode, handleDarkMode } = useDarkMode();
 
   console.log(user?.avatar);
   useEffect(() => {
@@ -38,16 +39,19 @@ export function Dashboard() {
             <span className="font-bold text-xl tracking-tight">Feedget</span>
           </div>
           <div className="flex items-center text-white">
+            <div className="mr-2">
+              {isDarkMode ? <Moon /> : <Sun color="#fff" />}
+            </div>
             <Switch
-              checked={enabled}
-              onChange={setEnabled}
+              checked={isDarkMode}
+              onChange={handleDarkMode}
               className={`${
-                enabled ? "bg-blue-600" : "bg-gray-200"
+                isDarkMode ? "bg-blue-600" : "bg-gray-200"
               } relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2`}
             >
               <span
                 className={`${
-                  enabled ? "translate-x-6" : "translate-x-1"
+                  isDarkMode ? "translate-x-6" : "translate-x-1"
                 } inline-block h-4 w-4 transform rounded-full bg-white transition-transform`}
               />
             </Switch>
@@ -99,13 +103,16 @@ export function Dashboard() {
       >
         <div className="fixed inset-0 bg-black/50" aria-hidden="true" />
         <div className="fixed inset-0 flex items-center justify-center p-4">
-          <Dialog.Panel className="relative w-full max-w-3xl rounded bg-[#242424] p-12">
+          <Dialog.Panel className="relative w-full max-w-3xl rounded bg-zinc-200 dark:bg-[#242424] p-12">
             <button
               onClick={() => setIsModalOpen(false)}
               className="absolute top-5 right-5 text-white hover:text-zinc-100"
               title="Fechar formulário de feedback"
             >
-              <X weight="bold" className="w-4 h-4"></X>
+              <X
+                weight="bold"
+                className="w-4 h-4 text-zinc-500 dark:text-zinc-100"
+              ></X>
             </button>
             <Dialog.Title></Dialog.Title>
 
